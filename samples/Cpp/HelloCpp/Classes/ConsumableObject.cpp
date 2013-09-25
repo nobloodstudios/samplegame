@@ -41,10 +41,6 @@ void CConsumableObject::update(float dt)
 }
 CGameObject* CConsumableObject::onTouch(cocos2d::CCPoint point)
 {
-	if (subtype == 1)
-	{
-		int xxx=0;
-	}
 	return CGameObject::onTouch(point);
 }
 void CConsumableObject::doAction(CGameObject* object)

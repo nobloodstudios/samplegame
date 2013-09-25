@@ -31,7 +31,9 @@ var winSize = null;
 
 var PLATFORM_JSB = 1 << 0;
 var PLATFORM_HTML5 = 1 << 1;
-var PLATFORM_ALL = PLATFORM_JSB | PLATFORM_HTML5;
+var PLATFORM_HTML5_WEBGL = 1 << 2;
+var PLATFORM_JSB_AND_WEBGL =  PLATFORM_JSB | PLATFORM_HTML5_WEBGL;
+var PLATFORM_ALL = PLATFORM_JSB | PLATFORM_HTML5 | PLATFORM_HTML5_WEBGL;
 
 // automation vars
 var autoTestEnabled = autoTestEnabled || false;
@@ -40,7 +42,6 @@ var autoTestCurrentTestName = autoTestCurrentTestName || "N/A";
 var TestScene = cc.Scene.extend({
     ctor:function (bPortrait) {
         this._super();
-        cc.associateWithNative( this, cc.Scene );
         this.init();
     },
 
@@ -78,9 +79,9 @@ var TestController = cc.LayerGradient.extend({
     _itemMenu:null,
     _beginPos:0,
     isMouseDown:false,
+
     ctor:function() {
         this._super();
-        cc.associateWithNative( this, cc.LayerGradient );
         // this.init( cc.c4b(0,0,0,255), cc.c4b(98,99,117,255), cc.p(-1,-1));
         this.init( cc.c4b(0,0,0,255), cc.c4b(0x46,0x82,0xB4,255));
 
@@ -118,8 +119,12 @@ var TestController = cc.LayerGradient.extend({
 
             // enable disable
             if ( sys.platform == 'browser') {
-                menuItem.setEnabled( testNames[i].platforms & PLATFORM_HTML5 );
-            } else { /* jsb */
+                if( 'opengl' in sys.capabilities ){
+                    menuItem.setEnabled( (testNames[i].platforms & PLATFORM_HTML5) | (testNames[i].platforms & PLATFORM_HTML5_WEBGL) );
+                }else{
+                    menuItem.setEnabled( testNames[i].platforms & PLATFORM_HTML5 );
+                }
+            } else {
                 menuItem.setEnabled( testNames[i].platforms & PLATFORM_JSB );
             }
         }
@@ -179,14 +184,12 @@ var TestController = cc.LayerGradient.extend({
     onScrollWheel:function(event){
         var delta = event.getWheelDelta();
         this.moveMenu({y:-delta});
-        //console.log(1);
         return true;
     },
     moveMenu:function(delta) {
         var current = this._itemMenu.getPosition();
 
         var newY = current.y + delta.y;
-
         if (newY < 0 )
             newY = 0;
 
@@ -236,6 +239,13 @@ var testNames = [
         }
     },
     {
+        title:"ClippingNode Test",
+        platforms: PLATFORM_JSB_AND_WEBGL,
+        testScene:function () {
+            return new ClippingNodeTestScene();
+        }
+    },
+    {
         title:"CocosDenshion Test",
         resource:g_cocosdeshion,
         platforms: PLATFORM_ALL,
@@ -275,19 +285,25 @@ var testNames = [
     {
         title:"Extensions Test",
         resource:g_extensions,
-        platforms: PLATFORM_HTML5,
+        platforms: PLATFORM_ALL,
         testScene:function () {
             return new ExtensionsTestScene();
         }
     },
     {
         title:"Effects Test",
-        platforms: PLATFORM_JSB,
+        platforms: PLATFORM_JSB_AND_WEBGL,
         testScene:function () {
             return new EffectsTestScene();
         }
     },
-    //"EffectAdvancedTest",
+    {
+        title:"Effects Advanced Test",
+        platforms: PLATFORM_JSB_AND_WEBGL,
+        testScene:function () {
+            return new EffectAdvanceScene();
+        }
+    },
     //"ExtensionsTest",
     {
         title:"FileUtils Test",
@@ -337,16 +353,23 @@ var testNames = [
         }
     },
     {
+        title:"MotionStreak Test",
+        platforms: PLATFORM_HTML5_WEBGL,
+        testScene:function () {
+            return new MotionStreakTestScene();
+        }
+    },
+    {
         title:"Node Test",
         platforms: PLATFORM_ALL,
         testScene:function () {
             return new NodeTestScene();
         }
     },
-    //"MotionStreakTest",
     {
         title:"OpenGL Test",
-        platforms: PLATFORM_JSB,
+        resource:g_opengl_resources,
+        platforms: PLATFORM_JSB_AND_WEBGL,
         testScene:function () {
             return new OpenGLTestScene();
         }
@@ -370,6 +393,7 @@ var testNames = [
     {
         title:"Performance Test",
         platforms: PLATFORM_ALL,
+        resource:g_performace,
         testScene:function () {
             return new PerformanceTestScene();
         }
@@ -383,7 +407,7 @@ var testNames = [
     },
     {
         title:"RenderTexture Test",
-        platforms: PLATFORM_JSB,
+        platforms: PLATFORM_JSB_AND_WEBGL,
         testScene:function () {
             return new RenderTextureTestScene();
         }
@@ -484,8 +508,103 @@ var testNames = [
         testScene:function () {
             return new PresentationScene();
         }
+    },
+    {
+        title:"XMLHttpRequest",
+        platforms: PLATFORM_JSB,
+        testScene:function () {
+            return new XHRTestScene();
+        }
     }
 
     //"UserDefaultTest",
     //"ZwoptexTest",
 ];
+
+var s_rcVisible = cc.rect(0, 0, 0, 0);
+var s_ptCenter = cc.p(0, 0);
+var s_ptTop = cc.p(0, 0);
+var s_ptTopRight = cc.p(0, 0);
+var s_ptRight = cc.p(0, 0);
+var s_ptBottomRight = cc.p(0, 0);
+var s_ptBottom = cc.p(0, 0);
+var s_ptLeft = cc.p(0, 0);
+var s_ptTopLeft = cc.p(0, 0);
+
+var VisibleRect = {
+rect:function () {
+    if (s_rcVisible.width == 0) {
+        var s = cc.Director.getInstance().getWinSize();
+        s_rcVisible = cc.rect(0, 0, s.width, s.height);
+    }
+    return s_rcVisible;
+},
+center:function () {
+    if (s_ptCenter.x == 0) {
+        var rc = this.rect();
+        s_ptCenter.x = rc.x + rc.width / 2;
+        s_ptCenter.y = rc.y + rc.height / 2;
+    }
+    return s_ptCenter;
+},
+top:function () {
+    if (s_ptTop.x == 0) {
+        var rc = this.rect();
+        s_ptTop.x = rc.x + rc.width / 2;
+        s_ptTop.y = rc.y + rc.height;
+    }
+    return s_ptTop;
+},
+topRight:function () {
+    if (s_ptTopRight.x == 0) {
+        var rc = this.rect();
+        s_ptTopRight.x = rc.x + rc.width;
+        s_ptTopRight.y = rc.y + rc.height;
+    }
+    return s_ptTopRight;
+},
+right:function () {
+    if (s_ptRight.x == 0) {
+        var rc = this.rect();
+        s_ptRight.x = rc.x + rc.width;
+        s_ptRight.y = rc.y + rc.height / 2;
+    }
+    return s_ptRight;
+},
+bottomRight:function () {
+    if (s_ptBottomRight.x == 0) {
+        var rc = this.rect();
+        s_ptBottomRight.x = rc.x + rc.width;
+        s_ptBottomRight.y = rc.y;
+    }
+    return s_ptBottomRight;
+},
+bottom:function () {
+    if (s_ptBottom.x == 0) {
+        var rc = this.rect();
+        s_ptBottom.x = rc.x + rc.width / 2;
+        s_ptBottom.y = rc.y;
+    }
+    return s_ptBottom;
+},
+bottomLeft:function () {
+    return this.rect();
+},
+left:function () {
+    if (s_ptLeft.x == 0) {
+        var rc = this.rect();
+        s_ptLeft.x = rc.x;
+        s_ptLeft.y = rc.y + rc.height / 2;
+    }
+    return s_ptLeft;
+},
+topLeft:function () {
+    if (s_ptTopLeft.x == 0) {
+        var rc = this.rect();
+        s_ptTopLeft.x = rc.x;
+        s_ptTopLeft.y = rc.y + rc.height;
+    }
+    return s_ptTopLeft;
+}
+};
+

@@ -1,10 +1,8 @@
 #include "AppDelegate.h"
-
 #include <vector>
 #include <string>
 #include "AppMacros.h"
-#include <CCLuaEngine.h>
-#include "GameController.h"
+#include "CCLuaEngine.h"
 USING_NS_CC;
 using namespace std;
 
@@ -56,20 +54,17 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
         pDirector->setContentScaleFactor(MIN(smallResource.size.height/designResolutionSize.height, smallResource.size.width/designResolutionSize.width));
     }
-    
     // set searching path
     CCFileUtils::sharedFileUtils()->setSearchPaths(searchPath);
-	
     // turn on display FPS
     pDirector->setDisplayStats(true);
-
     // set FPS. the default value is 1.0/60 if you don't call this
     pDirector->setAnimationInterval(1.0 / 60);
-	// register lua engine
+    // register lua engine
     cocos2d::CCLuaEngine* pEngine = cocos2d::CCLuaEngine::defaultEngine();
     cocos2d::CCScriptEngineManager::sharedManager()->setScriptEngine(pEngine);
-	//  initialize game controller
-	CGameController::instance().init();
+    //  initialize game controller
+    CGameController::instance().init();
     // run
      return true;
 }

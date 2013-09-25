@@ -38,7 +38,7 @@
 		<key>size</key>
 		<string>{1024, 1024}</string>
 		<key>textureFileName</key>
-		<string>shimmer.pvr.ccz</string>
+		<string>shimmer.png</string>
 	</dict>
 </dict>
 </plist>

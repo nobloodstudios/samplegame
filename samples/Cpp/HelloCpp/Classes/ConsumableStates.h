@@ -13,7 +13,7 @@ struct ConsumableConstants
 *  generic consumable state implementation
 */
 template<int state, int subtype>
-class CConsumableState : public State
+class CConsumableState : public IState
 {
 };
 /**

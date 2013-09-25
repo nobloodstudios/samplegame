@@ -58,6 +58,10 @@ var s_tcc_issue_2_plist = "res/animations/tcc_issue_2.plist";
 
 var s_s9s_blocks9 = "res/Images/blocks9ss.png";
 var s_s9s_blocks9_plist = "res/Images/blocks9ss.plist";
+var s_blocks9 = "res/Images/blocks9.png";
+
+var s_s9s_ui = "res/Images/ui.png";
+var s_s9s_ui_plist = "res/Images/ui.plist";
 
 var s_boilingFoamPlist = "res/Images/BoilingFoam.plist";
 var s_grossiniPlist = "res/animations/grossini.plist";
@@ -103,6 +107,8 @@ var s_orthoTest1Png = "res/TileMaps/ortho-test1.png";
 var s_tilesHdPng = "res/TileMaps/tiles-hd.png";
 var s_tmwDesertSpacingHdPng = "res/TileMaps/tmw_desert_spacing-hd.png";
 var s_tmwDesertSpacingPng = "res/TileMaps/tmw_desert_spacing.png";
+var s_tileISOOffsetPng = "res/TileMaps/tile_iso_offset.png";
+var s_tileISOOffsetTmx = "res/TileMaps/tile_iso_offset.tmx";
 
 var s_fnTuffyBoldItalicCharmapPng = "res/fonts/tuffy_bold_italic-charmap.png";
 var s_fpsImages = "res/fonts/fps_images.png";
@@ -132,9 +138,12 @@ var s_arial16_fnt = "res/fonts/arial16.fnt";
 var s_futura48_fnt = "res/fonts/futura-48.fnt";
 var s_helvetica32_fnt = "res/fonts/helvetica-32.fnt";
 var s_geneva32_fnt = "res/fonts/geneva-32.fnt";
+var s_helvetica_helvetica_32_png = "res/fonts/helvetica-geneva-32.png";
 var s_arial_unicode_26_fnt = "res/fonts/arial-unicode-26.fnt";
 var s_markerFelt_fnt = "res/fonts/markerFelt.fnt";
+var s_markerFelt_png = "res/fonts/markerFelt.png";
 var s_markerFelt_hd_fnt = "res/fonts/markerFelt-hd.fnt";
+var s_markerFelt_hd_png = "res/fonts/markerFelt-hd.png";
 
 var s_larabie_16_plist = "res/fonts/larabie-16.plist";
 var s_larabie_16_hd_plist = "res/fonts/larabie-16-hd.plist";
@@ -143,6 +152,12 @@ var s_tuffy_bold_italic_charmap_hd = "res/fonts/tuffy_bold_italic-charmap-hd.pli
 
 var s_particles = "res/Images/particles.png";
 var s_particles_hd = "res/Images/particles-hd.png";
+var s_texture512 = "res/Images/texture512x512.png";
+var s_hole_effect_png = "res/Images/hole_effect.png";
+var s_hole_stencil_png = "res/Images/hole_stencil.png";
+var s_pathFog = "res/Images/Fog.png";
+var s_circle_plist  = "res/Images/bugs/circle.plist";
+var s_circle_png  = "res/Images/bugs/circle.png";
 
 var s_extensions_background = "res/extensions/background.png";
 var s_extensions_buttonBackground = "res/extensions/buttonBackground.png";
@@ -153,6 +168,13 @@ var s_image_icon = "res/Images/Icon.png";
 
 var g_ressources = [
     //global
+    {src:s_grossini_dance_atlas},
+    {src:s_pathFog},
+    {src:s_circle_plist},
+    {src:s_circle_png},
+    {src:s_texture512},
+    {src:s_hole_effect_png},
+    {src:s_hole_stencil_png},
     {src:s_pathB1},
     {src:s_pathB2},
     {src:s_pathR1},
@@ -185,14 +207,19 @@ var g_ressources = [
     {src:s_grossiniPlist},
 
     {src:s_animations2Plist},
-    {src:s_helloWorld}
+    {src:s_grossini_blue},
+    {src:s_grossini_bluePlist},
+    {src:s_grossini_family},
+    {src:s_grossini_familyPlist},
+    {src:s_helloWorld},
+    {src:s_bitmapFontTest5},
+    {src:s_bitmapFontTest5_fnt}
 ];
 
 var g_sprites = [
     {src:s_piece},
     {src:s_grossini_gray},
     {src:s_grossini_blue},
-    {src:s_grossini_dance_atlas},
     {src:s_grossini_aliases},
     {src:s_dragon_animation},
     {src:s_ghosts},
@@ -241,7 +268,34 @@ var g_fileUtils = [
 
 var g_s9s_blocks = [
     {src:s_s9s_blocks9_plist},
-    {src:s_s9s_blocks9}
+    {src:s_s9s_blocks9},
+    {src:s_blocks9},
+    {src:s_s9s_ui},
+    {src:s_s9s_ui_plist}
+];
+
+var g_opengl_resources = [
+    //preload shader source
+    {src:"res/Shaders/example_Blur.fsh"},
+    {src:"res/Shaders/example_ColorBars.fsh"},
+    {src:"res/Shaders/example_ColorBars.vsh"},
+    {src:"res/Shaders/example_Flower.fsh"},
+    {src:"res/Shaders/example_Flower.vsh"},
+    {src:"res/Shaders/example_Heart.fsh"},
+    {src:"res/Shaders/example_Heart.vsh"},
+    {src:"res/Shaders/example_Julia.fsh"},
+    {src:"res/Shaders/example_Julia.vsh"},
+    {src:"res/Shaders/example_Mandelbrot.fsh"},
+    {src:"res/Shaders/example_Mandelbrot.vsh"},
+    {src:"res/Shaders/example_Monjori.fsh"},
+    {src:"res/Shaders/example_Monjori.vsh"},
+    {src:"res/Shaders/example_Plasma.fsh"},
+    {src:"res/Shaders/example_Plasma.vsh"},
+    {src:"res/Shaders/example_Twist.fsh"},
+    {src:"res/Shaders/example_Twist.vsh"},
+
+    {src:"res/fonts/west_england-64.fnt"},
+    {src:"res/fonts/west_england-64.png"},
 ];
 
 var g_label = [
@@ -250,7 +304,6 @@ var g_label = [
     {src:s_bitmapFontTest2},
     {src:s_bitmapFontTest3},
     {src:s_bitmapFontTest4},
-    {src:s_bitmapFontTest5},
     {src:s_konqa32},
     {src:s_konqa32_hd},
     {src:s_bitmapFontChinese},
@@ -273,7 +326,6 @@ var g_label = [
     {src:s_bitmapFontTest2_fnt},
     {src:s_bitmapFontTest3_fnt},
     {src:s_bitmapFontTest4_fnt},
-    {src:s_bitmapFontTest5_fnt},
     {src:s_konqa32_fnt},
     {src:s_konqa32_hd_fnt},
     {src:s_bitmapFontChinese_fnt},
@@ -281,9 +333,12 @@ var g_label = [
     {src:s_futura48_fnt},
     {src:s_helvetica32_fnt},
     {src:s_geneva32_fnt},
+    {src:s_helvetica_helvetica_32_png},
     {src:s_arial_unicode_26_fnt},
     {src:s_markerFelt_fnt},
+    {src:s_markerFelt_png},
     {src:s_markerFelt_hd_fnt},
+    {src:s_markerFelt_hd_png},
     {src:"res/fonts/strings.xml"}
 ];
 
@@ -382,6 +437,7 @@ var g_extensions = [
     {src:"res/ccb/ccb/TestScrollViewsContentA.ccbi"},
     {src:"res/ccb/ccb/TestSprites.ccbi"},
 
+    {src:"res/ccb/ccbParticleStars.png"},
     {src:"res/ccb/btn-test-0.png"},
     {src:"res/ccb/animated-grossini.png"},
     {src:"res/ccb/btn-a-0.png"},
@@ -409,11 +465,84 @@ var g_extensions = [
     {src:"res/ccb/particle-snow.png"},
     {src:"res/ccb/particle-stars.png"},
     {src:"res/ccb/scale-9-demo.png"},
+    {src:"res/extensions/green_edit.png"},
+    {src:"res/extensions/orange_edit.png"},
+    {src:"res/extensions/yellow_edit.png"},
 
     {src:"res/ccb/markerfelt24shadow.fnt"},
 
     {src:"res/ccb/grossini-generic.plist"},
     {src:"res/ccb/animated-grossini.plist"}
+];
+var g_performace = [
+    {src:"res/animations/crystals.plist"},
+    {src:"res/animations/crystals.png"},
+    {src:"res/Images/fps_images.png"},
+    {src:"res/Images/spritesheet1.png"},
+    {src:"res/Images/sprites_test/sprite-0-0.png"},
+    {src:"res/Images/sprites_test/sprite-0-1.png"},
+    {src:"res/Images/sprites_test/sprite-0-2.png"},
+    {src:"res/Images/sprites_test/sprite-0-3.png"},
+    {src:"res/Images/sprites_test/sprite-0-4.png"},
+    {src:"res/Images/sprites_test/sprite-0-5.png"},
+    {src:"res/Images/sprites_test/sprite-0-6.png"},
+    {src:"res/Images/sprites_test/sprite-0-7.png"},
+    {src:"res/Images/sprites_test/sprite-1-0.png"},
+    {src:"res/Images/sprites_test/sprite-1-1.png"},
+    {src:"res/Images/sprites_test/sprite-1-2.png"},
+    {src:"res/Images/sprites_test/sprite-1-3.png"},
+    {src:"res/Images/sprites_test/sprite-1-4.png"},
+    {src:"res/Images/sprites_test/sprite-1-5.png"},
+    {src:"res/Images/sprites_test/sprite-1-6.png"},
+    {src:"res/Images/sprites_test/sprite-1-7.png"},
+    {src:"res/Images/sprites_test/sprite-2-0.png"},
+    {src:"res/Images/sprites_test/sprite-2-1.png"},
+    {src:"res/Images/sprites_test/sprite-2-2.png"},
+    {src:"res/Images/sprites_test/sprite-2-3.png"},
+    {src:"res/Images/sprites_test/sprite-2-4.png"},
+    {src:"res/Images/sprites_test/sprite-2-5.png"},
+    {src:"res/Images/sprites_test/sprite-2-6.png"},
+    {src:"res/Images/sprites_test/sprite-2-7.png"},
+    {src:"res/Images/sprites_test/sprite-3-0.png"},
+    {src:"res/Images/sprites_test/sprite-3-1.png"},
+    {src:"res/Images/sprites_test/sprite-3-2.png"},
+    {src:"res/Images/sprites_test/sprite-3-3.png"},
+    {src:"res/Images/sprites_test/sprite-3-4.png"},
+    {src:"res/Images/sprites_test/sprite-3-5.png"},
+    {src:"res/Images/sprites_test/sprite-3-6.png"},
+    {src:"res/Images/sprites_test/sprite-3-7.png"},
+    {src:"res/Images/sprites_test/sprite-4-0.png"},
+    {src:"res/Images/sprites_test/sprite-4-1.png"},
+    {src:"res/Images/sprites_test/sprite-4-2.png"},
+    {src:"res/Images/sprites_test/sprite-4-3.png"},
+    {src:"res/Images/sprites_test/sprite-4-4.png"},
+    {src:"res/Images/sprites_test/sprite-4-5.png"},
+    {src:"res/Images/sprites_test/sprite-4-6.png"},
+    {src:"res/Images/sprites_test/sprite-4-7.png"},
+    {src:"res/Images/sprites_test/sprite-5-0.png"},
+    {src:"res/Images/sprites_test/sprite-5-1.png"},
+    {src:"res/Images/sprites_test/sprite-5-2.png"},
+    {src:"res/Images/sprites_test/sprite-5-3.png"},
+    {src:"res/Images/sprites_test/sprite-5-4.png"},
+    {src:"res/Images/sprites_test/sprite-5-5.png"},
+    {src:"res/Images/sprites_test/sprite-5-6.png"},
+    {src:"res/Images/sprites_test/sprite-5-7.png"},
+    {src:"res/Images/sprites_test/sprite-6-0.png"},
+    {src:"res/Images/sprites_test/sprite-6-1.png"},
+    {src:"res/Images/sprites_test/sprite-6-2.png"},
+    {src:"res/Images/sprites_test/sprite-6-3.png"},
+    {src:"res/Images/sprites_test/sprite-6-4.png"},
+    {src:"res/Images/sprites_test/sprite-6-5.png"},
+    {src:"res/Images/sprites_test/sprite-6-6.png"},
+    {src:"res/Images/sprites_test/sprite-6-7.png"},
+    {src:"res/Images/sprites_test/sprite-7-0.png"},
+    {src:"res/Images/sprites_test/sprite-7-1.png"},
+    {src:"res/Images/sprites_test/sprite-7-2.png"},
+    {src:"res/Images/sprites_test/sprite-7-3.png"},
+    {src:"res/Images/sprites_test/sprite-7-4.png"},
+    {src:"res/Images/sprites_test/sprite-7-5.png"},
+    {src:"res/Images/sprites_test/sprite-7-6.png"},
+    {src:"res/Images/sprites_test/sprite-7-7.png"}
 ];
 
 var g_tilemaps = [
@@ -429,6 +558,9 @@ var g_tilemaps = [
     {src:s_tmwDesertSpacingHdPng},
     {src:s_tmwDesertSpacingPng},
     {src:s_tilesPng},
+    {src:s_tileISOOffsetPng},
+    {src:s_tileISOOffsetTmx},
+    {src:"res/TileMaps/ortho-test2.png"},
 
     //tmx
     {src:"res/TileMaps/orthogonal-test1.tmx"},

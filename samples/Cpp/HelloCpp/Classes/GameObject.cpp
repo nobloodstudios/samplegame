@@ -1,7 +1,7 @@
 #include <GameObject.h>
 CGameObject::CGameObject(char _type, cocos2d::CCScene* parent)
-	: type(_type)
-	, scene(parent)
+	: scene(parent)
+	, type(_type)
 	, selected(false)
 	, selection(NULL)
 {

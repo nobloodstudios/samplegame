@@ -3,6 +3,7 @@
 	<name>HelloCpp</name>
 	<comment></comment>
 	<projects>
+		<project>libcocos2dx</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -120,17 +121,17 @@
 		<link>
 			<name>Classes</name>
 			<type>2</type>
-			<locationURI>COCOS2DX/samples/Cpp/HelloCpp/Classes</locationURI>
+			<location>/home/iulia/workspace/samplegame/samples/Cpp/HelloCpp/Classes</location>
 		</link>
 		<link>
 			<name>cocos2dx</name>
 			<type>2</type>
-			<locationURI>COCOS2DX/cocos2dx</locationURI>
+			<location>/home/iulia/workspace/samplegame/cocos2dx</location>
 		</link>
 		<link>
 			<name>extensions</name>
 			<type>2</type>
-			<locationURI>COCOS2DX/extensions</locationURI>
+			<location>/home/iulia/workspace/samplegame/extensions</location>
 		</link>
 	</linkedResources>
 </projectDescription>
