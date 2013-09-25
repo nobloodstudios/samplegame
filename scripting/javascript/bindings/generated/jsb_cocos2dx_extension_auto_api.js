@@ -9,6 +9,12 @@ var cc = cc || {};
 cc._Reader = {
 
 /**
+ * @method addOwnerOutletName
+ * @param {std::string}
+ */
+addOwnerOutletName : function () {},
+
+/**
  * @method getOwnerCallbackNames
  * @return A value converted from C/C++ "cocos2d::CCArray*"
  */
@@ -19,6 +25,12 @@ getOwnerCallbackNames : function () {},
  * @param {const char*}
  */
 setCCBRootPath : function () {},
+
+/**
+ * @method addOwnerOutletNode
+ * @param {cocos2d::CCNode*}
+ */
+addOwnerOutletNode : function () {},
 
 /**
  * @method getOwnerCallbackNodes
@@ -87,6 +99,12 @@ getNodesWithAnimationManagers : function () {},
  * @return A value converted from C/C++ "cocos2d::extension::CCBAnimationManager*"
  */
 getAnimationManager : function () {},
+
+/**
+ * @method setResolutionScale
+ * @param {float}
+ */
+setResolutionScale : function () {},
 
 };
 
@@ -175,12 +193,6 @@ isSelected : function () {},
 init : function () {},
 
 /**
- * @method getDefaultTouchPriority
- * @return A value converted from C/C++ "int"
- */
-getDefaultTouchPriority : function () {},
-
-/**
  * @method setHighlighted
  * @param {bool}
  */
@@ -196,12 +208,6 @@ registerWithTouchDispatcher : function () {},
  * @return A value converted from C/C++ "bool"
  */
 isHighlighted : function () {},
-
-/**
- * @method setDefaultTouchPriority
- * @param {int}
- */
-setDefaultTouchPriority : function () {},
 
 /**
  * @method CCControl
@@ -269,10 +275,22 @@ init : function () {},
 setPreferredSize : function () {},
 
 /**
+ * @method getOpacity
+ * @return A value converted from C/C++ "unsigned char"
+ */
+getOpacity : function () {},
+
+/**
  * @method setSpriteFrame
  * @param {cocos2d::CCSpriteFrame*}
  */
 setSpriteFrame : function () {},
+
+/**
+ * @method getColor
+ * @return A value converted from C/C++ "cocos2d::ccColor3B"
+ */
+getColor : function () {},
 
 /**
  * @method getInsetBottom
@@ -286,6 +304,12 @@ getInsetBottom : function () {},
  * @param {cocos2d::CCRect}
  */
 resizableSpriteWithCapInsets : function () {},
+
+/**
+ * @method setOpacity
+ * @param {unsigned char}
+ */
+setOpacity : function () {},
 
 /**
  * @method setContentSize
@@ -304,6 +328,12 @@ getInsetRight : function () {},
  * @return A value converted from C/C++ "cocos2d::CCSize"
  */
 getOriginalSize : function () {},
+
+/**
+ * @method setColor
+ * @param {cocos2d::ccColor3B}
+ */
+setColor : function () {},
 
 /**
  * @method getInsetTop
@@ -361,10 +391,10 @@ cc.ControlButton = {
 setTitleColorDispatchTable : function () {},
 
 /**
- * @method isPushed
- * @return A value converted from C/C++ "bool"
+ * @method setZoomOnTouchDown
+ * @param {bool}
  */
-isPushed : function () {},
+setZoomOnTouchDown : function () {},
 
 /**
  * @method setSelected
@@ -419,10 +449,18 @@ setHighlighted : function () {},
 setBackgroundSpriteDispatchTable : function () {},
 
 /**
- * @method setZoomOnTouchDown
- * @param {bool}
+ * @method setTitleLabelForState
+ * @param {cocos2d::CCNode*}
+ * @param {unsigned int}
  */
-setZoomOnTouchDown : function () {},
+setTitleLabelForState : function () {},
+
+/**
+ * @method setTitleForState
+ * @param {cocos2d::CCString*}
+ * @param {unsigned int}
+ */
+setTitleForState : function () {},
 
 /**
  * @method getTitleDispatchTable
@@ -470,6 +508,12 @@ getTitleTTFSizeForState : function () {},
 setTitleDispatchTable : function () {},
 
 /**
+ * @method isPushed
+ * @return A value converted from C/C++ "bool"
+ */
+isPushed : function () {},
+
+/**
  * @method setOpacity
  * @param {unsigned char}
  */
@@ -495,11 +539,10 @@ setTitleTTFForState : function () {},
 setPreferredSize : function () {},
 
 /**
- * @method setTitleLabelForState
- * @param {cocos2d::CCNode*}
- * @param {unsigned int}
+ * @method getHorizontalOrigin
+ * @return A value converted from C/C++ "int"
  */
-setTitleLabelForState : function () {},
+getHorizontalOrigin : function () {},
 
 /**
  * @method ccTouchMoved
@@ -540,10 +583,10 @@ setEnabled : function () {},
 getBackgroundSpriteForState : function () {},
 
 /**
- * @method getHorizontalOrigin
- * @return A value converted from C/C++ "int"
+ * @method getColor
+ * @return A value converted from C/C++ "cocos2d::ccColor3B"
  */
-getHorizontalOrigin : function () {},
+getColor : function () {},
 
 /**
  * @method setMargins
@@ -621,6 +664,12 @@ setBackgroundSpriteFrameForState : function () {},
 setBackgroundSpriteForState : function () {},
 
 /**
+ * @method setColor
+ * @param {cocos2d::ccColor3B}
+ */
+setColor : function () {},
+
+/**
  * @method getTitleLabelDispatchTable
  * @return A value converted from C/C++ "cocos2d::CCDictionary*"
  */
@@ -683,13 +732,6 @@ getCurrentTitle : function () {},
  * @param {unsigned int}
  */
 getTitleBMFontForState : function () {},
-
-/**
- * @method setTitleForState
- * @param {cocos2d::CCString*}
- * @param {unsigned int}
- */
-setTitleForState : function () {},
 
 /**
  * @method setBackgroundSprite
@@ -1345,16 +1387,28 @@ setAnchorPoint : function () {},
 getText : function () {},
 
 /**
- * @method setContentSize
- * @param {cocos2d::CCSize}
+ * @method setPlaceholderFontName
+ * @param {const char*}
  */
-setContentSize : function () {},
+setPlaceholderFontName : function () {},
 
 /**
  * @method getPlaceHolder
  * @return A value converted from C/C++ "const char*"
  */
 getPlaceHolder : function () {},
+
+/**
+ * @method setFontName
+ * @param {const char*}
+ */
+setFontName : function () {},
+
+/**
+ * @method setPlaceholderFontSize
+ * @param {int}
+ */
+setPlaceholderFontSize : function () {},
 
 /**
  * @method setInputMode
@@ -1380,6 +1434,12 @@ setFontColor : function () {},
  * @param {int}
  */
 setPlaceholderFont : function () {},
+
+/**
+ * @method setFontSize
+ * @param {int}
+ */
+setFontSize : function () {},
 
 /**
  * @method initWithSizeAndBackgroundSprite
@@ -1408,16 +1468,16 @@ setPosition : function () {},
 setReturnType : function () {},
 
 /**
- * @method getMaxLength
- * @return A value converted from C/C++ "int"
- */
-getMaxLength : function () {},
-
-/**
  * @method setInputFlag
  * @param {cocos2d::extension::EditBoxInputFlag}
  */
 setInputFlag : function () {},
+
+/**
+ * @method getMaxLength
+ * @return A value converted from C/C++ "int"
+ */
+getMaxLength : function () {},
 
 /**
  * @method setText
@@ -1430,6 +1490,12 @@ setText : function () {},
  * @param {int}
  */
 setMaxLength : function () {},
+
+/**
+ * @method setContentSize
+ * @param {cocos2d::CCSize}
+ */
+setContentSize : function () {},
 
 /**
  * @method setFont

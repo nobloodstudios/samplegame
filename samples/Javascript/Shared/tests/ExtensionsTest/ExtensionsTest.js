@@ -39,7 +39,7 @@ var extensionsTestItemNames = [
      //runNotificationCenterTest();
      cc.log("not implement");
      }
-     },*/
+     },
     {
         itemTitle:"CCControlButtonTest",
         testScene:function () {
@@ -75,15 +75,16 @@ var extensionsTestItemNames = [
         testScene:function () {
             runEditBoxTest();
         }
+    },
+    {
+        itemTitle:"WebSocketTest",
+        testScene:function () {
+            runWebSocketTest();
+        }
     }
 ];
 
 var ExtensionsMainLayer = cc.Layer.extend({
-    ctor:function() {
-        this._super();
-        cc.associateWithNative( this, cc.Layer );
-    },
-
     onEnter:function () {
         this._super();
 

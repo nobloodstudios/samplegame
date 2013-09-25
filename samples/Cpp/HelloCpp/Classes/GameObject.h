@@ -18,7 +18,7 @@ public:
 	virtual CGameObject* onTouch(cocos2d::CCPoint point);
 	virtual void doAction(CGameObject*) {}
 	virtual void remove();
-    cocos2d::CCRect getBounds() { return decorator->getTextureRect();}
+    	cocos2d::CCRect getBounds() { return decorator->getTextureRect();}
 	CC_PROPERTY(cocos2d::CCSprite*, decorator, Decorator);
 	CC_PROPERTY(cocos2d::CCScene*, scene, Scene);
 	CC_PROPERTY(cocos2d::CCPoint, screenPosition, ScreenPosition);

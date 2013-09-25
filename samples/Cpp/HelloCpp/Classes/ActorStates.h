@@ -7,7 +7,7 @@ struct ActorConstants
 	enum {OBJECT_TYPE_BEE = 1 , ACTORS_NUMBER = (1 + OBJECT_TYPE_BEE)} subtypes;
 };
 template<int state, int subtype>
-class CActorState : public State
+class CActorState : public IState
 {
 };
 /**

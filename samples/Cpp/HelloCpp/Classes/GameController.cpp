@@ -1,12 +1,12 @@
 #include <GameController.h>
 #include <cocos2d.h>
+#include <CCLuaEngine.h>
 #include <GameScene.h>
 #include <DecoratorObject.h>
 #include <ConsumableObject.h>
 #include <ActorObject.h>
-#include <CCLuaEngine.h>
 /**
- *	Populate tiles with game entities
+ *  Populate tiles with game entities
  *  params: row, col, type, subtype
  */
 static int luaPopulateTile(lua_State *L)
@@ -55,7 +55,7 @@ CGameController::CGameController()
 {
 	selections[0] = NULL;
 	selections[1] = NULL;
-	selectionIndex = NULL;
+	selectionIndex = 0;
 }
 CGameController::~CGameController()
 {

@@ -168,7 +168,7 @@
 		<key>size</key>
 		<string>{512, 512}</string>
 		<key>textureFileName</key>
-		<string>crystals.pvr.ccz</string>
+		<string>crystals.pvr</string>
 	</dict>
 </dict>
 </plist>

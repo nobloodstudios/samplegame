@@ -2,7 +2,7 @@
 #include "platform/android/jni/JniHelper.h"
 #include <jni.h>
 #include <android/log.h>
-
+#include "CCEventType.h"
 #include "GameScene.h"
 
 #define  LOG_TAG    "main"
@@ -37,7 +37,7 @@ void Java_org_cocos2dx_lib_Cocos2dxRenderer_nativeInit(JNIEnv*  env, jobject thi
         
         CCShaderCache::sharedShaderCache()->reloadDefaultShaders();
         CCTextureCache::reloadAllTextures();
-        CCNotificationCenter::sharedNotificationCenter()->postNotification(EVNET_COME_TO_FOREGROUND, NULL);
+        CCNotificationCenter::sharedNotificationCenter()->postNotification("event_come_to_foreground", NULL);
         CCDirector::sharedDirector()->setGLDefaultValues(); 
     }
 }
