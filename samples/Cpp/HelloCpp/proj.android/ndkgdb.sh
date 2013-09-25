@@ -1,9 +1,8 @@
 APPNAME="HelloCpp"
 APP_ANDROID_NAME="org.cocos2dx.hellocpp"
 
-if [ -z "${SDK_ROOT+aaa}" ]; then
-# ... if SDK_ROOT is not set, use "$HOME/bin/android-sdk"
-    SDK_ROOT="$HOME/bin/android-sdk"
+if [ -z "${ANDROID_SDK+aaa}" ]; then
+    ANDROID_SDK="$HOME/bin/android-sdk"
 fi
 
 if [ -z "${NDK_ROOT+aaa}" ]; then
@@ -25,7 +24,7 @@ else
 fi
 
 echo "NDK_ROOT = $NDK_ROOT"
-echo "SDK_ROOT = $SDK_ROOT"
+echo "ANDROID_SDK = $ANDROID_SDK"
 echo "COCOS2DX_ROOT = $COCOS2DX_ROOT"
 echo "APP_ROOT = $APP_ROOT"
 echo "APP_ANDROID_ROOT = $APP_ANDROID_ROOT"
@@ -37,11 +36,11 @@ echo
 
 set -x
 
-"${SDK_ROOT}"/platform-tools/adb shell am force-stop "${APP_ANDROID_NAME}"
+"${ANDROID_SDK}/platform-tools/adb shell am force-stop ${APP_ANDROID_NAME}"
 
 NDK_MODULE_PATH="${COCOS2DX_ROOT}":"${COCOS2DX_ROOT}"/cocos2dx/platform/third_party/android/prebuilt \
     "${NDK_ROOT}"/ndk-gdb \
-    --adb="${SDK_ROOT}"/platform-tools/adb \
+    --adb="${ANDROID_SDK}"/platform-tools/adb \
     --verbose \
     --start \
     --force
