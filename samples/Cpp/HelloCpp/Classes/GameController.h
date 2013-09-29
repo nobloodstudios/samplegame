@@ -21,6 +21,7 @@ public:
 	void loadBackground(const char* filename);
 	void update(float dt);
 	void onTouch(cocos2d::CCPoint point);
+	void removeGameObject(CGameObject* object);
 private:
 	cocos2d::CCScene* scene;
 	std::vector<CGameObject*>** grid;
@@ -34,5 +35,6 @@ private:
 	// keep track of object selections 
 	CGameObject* selections[2];
 	int selectionIndex;
+	std::vector<CGameObject*> dump;
 };
 #endif

@@ -1,13 +1,19 @@
 #include <GameObject.h>
-CGameObject::CGameObject(char _type, cocos2d::CCScene* parent)
+CGameObject::CGameObject(int _type, cocos2d::CCScene* parent, CGameController* controller)
 	: scene(parent)
 	, type(_type)
 	, selected(false)
 	, selection(NULL)
+	, gc(controller)
 {
 }
 CGameObject::~CGameObject()
 {
+	decorator->removeFromParent();
+	if (selected)
+	{
+		selection->removeFromParent();
+	}
 }
 void CGameObject::load()
 {
@@ -82,4 +88,10 @@ CGameObject* CGameObject::onTouch(cocos2d::CCPoint point)
 	}
 	selected = false;
 	return NULL;
+}
+/**
+ *  state callbacks
+ */
+void CGameObject::onExitState(int state)
+{
 }

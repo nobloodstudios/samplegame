@@ -1,16 +1,19 @@
 #include <ConsumableObject.h>
-CConsumableObject::CConsumableObject(char type, cocos2d::CCScene* parent)
-	: CGameObject(CGameObject::OBJECT_TYPE_CONSUMABLE << 8 | type, parent)
+#include <ActorStates.h>
+#include <GameController.h>
+
+CConsumableObject::CConsumableObject(char type, cocos2d::CCScene* parent, CGameController* controller)
+	: CGameObject(CGameObject::OBJECT_TYPE_CONSUMABLE << 8 | type, parent, controller)
 {
 	subtype = type;
 	stateHandler = NULL;
 	stateList[ConsumableConstants::OBJECT_TYPE_HONEY][ConsumableConstants::CONSUMABLE_STATE_IDLE] = &stateHoneyIdle;
 	stateList[ConsumableConstants::OBJECT_TYPE_FLOWER][ConsumableConstants::CONSUMABLE_STATE_IDLE] = &stateFlowerIdle;
+	stateList[ConsumableConstants::OBJECT_TYPE_FLOWER][ConsumableConstants::CONSUMABLE_STATE_HARVESTED] = &stateFlowerHarvested;
 	load();
 }
 CConsumableObject::~CConsumableObject()
 {
-	remove();
 }
 void CConsumableObject::load()
 {
@@ -47,9 +50,18 @@ void CConsumableObject::doAction(CGameObject* object)
 {
 	if (object->getType() == type)
 		return;
+	float distance = (object->getTilePosition() - getTilePosition()).getLength();
+	if (distance <= 2.0f)
+	{
+		if ( object->getType() == ((CGameObject::OBJECT_TYPE_ACTOR << 8) | ActorConstants::OBJECT_TYPE_BEE) )
+		{
+			setState(ConsumableConstants::CONSUMABLE_STATE_HARVESTED);
+		}
+	}
 }
 void CConsumableObject::remove()
 {
+	gc->removeGameObject(this);
 }
 void CConsumableObject::setState(int  s)
 {
@@ -66,4 +78,12 @@ void CConsumableObject::setState(int  s)
 int CConsumableObject::getState()
 {
 	return state;
+}
+void CConsumableObject::onExitState(int state)
+{
+	if (state == ConsumableConstants::CONSUMABLE_STATE_HARVESTED)
+	{
+		remove();
+		// TODO(iulia): gather points
+	}
 }

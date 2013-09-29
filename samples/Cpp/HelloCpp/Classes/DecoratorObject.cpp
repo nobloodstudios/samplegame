@@ -1,6 +1,6 @@
 #include <DecoratorObject.h>
-CDecoratorObject::CDecoratorObject(char type, cocos2d::CCScene* parent)
-	: CGameObject(CGameObject::OBJECT_TYPE_DECORATOR << 8 | type, parent)
+CDecoratorObject::CDecoratorObject(char type, cocos2d::CCScene* parent, CGameController* controller)
+	: CGameObject(CGameObject::OBJECT_TYPE_DECORATOR << 8 | type, parent, controller)
 {
 	subtype = type;
 	load();

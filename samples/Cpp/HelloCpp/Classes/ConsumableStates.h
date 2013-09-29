@@ -6,7 +6,7 @@
  */
 struct ConsumableConstants
 {
-	enum {CONSUMABLE_STATE_IDLE = 1, CONSUMABLE_NUMSTATES = (1 + CONSUMABLE_STATE_IDLE)} states;
+	enum {CONSUMABLE_STATE_IDLE = 1, CONSUMABLE_STATE_HARVESTED, CONSUMABLE_NUMSTATES = (1 + CONSUMABLE_STATE_HARVESTED)} states;
 	enum {OBJECT_TYPE_HONEY = 1, OBJECT_TYPE_FLOWER, CONSUMABLE_NUMBER = (OBJECT_TYPE_FLOWER + 1)} subtypes;
 };
 /**
@@ -25,6 +25,7 @@ class CConsumableState <ConsumableConstants::CONSUMABLE_STATE_IDLE, ConsumableCo
 {
 public:
 	CConsumableState()
+		: idleAction(NULL)
 	{
 		onInit();
 	}
@@ -33,16 +34,19 @@ public:
 	*/
 	void onInit()
 	{
-		cocos2d::CCArray a ;
-		a.addObject(cocos2d::CCScaleBy::create(1.0f, 1.01f));
-		a.addObject(cocos2d::CCScaleBy::create(1.0f, 1.0f/1.01f));
-		idleAction = cocos2d::CCRepeatForever::create(cocos2d::CCSequence::create(&a));
+	}
+	void onRelease()
+	{
 	}
 	/**
 	 *  do stuff when before entering into new state
 	 */
 	void onEnter(CGameObject* object)
 	{
+		cocos2d::CCArray a ;
+		a.addObject(cocos2d::CCScaleBy::create(1.0f, 1.01f));
+		a.addObject(cocos2d::CCScaleBy::create(1.0f, 1.0f/1.01f));
+		idleAction = cocos2d::CCRepeatForever::create(cocos2d::CCSequence::create(&a));
 		object->getDecorator()->runAction(idleAction);
 	}
 	/**
@@ -64,30 +68,34 @@ private:
 
 /**
  * specialize all states with an implementation 
- * <FLOWER>
+ * <FLOWER idle>
  */
 template<>
 class CConsumableState <ConsumableConstants::CONSUMABLE_STATE_IDLE, ConsumableConstants::OBJECT_TYPE_FLOWER> : public IState
 {
 public:
 	CConsumableState()
+		: idleAction(NULL)
 	{
-		onInit();
+		onInit();	
 	}
 	/**
 	*  load animations or any item related to this state
 	*/
 	void onInit()
 	{
-		cocos2d::CCArray a ;
-		a.addObject(cocos2d::CCRotateBy::create(30.0f, 360.0f));
-		idleAction = cocos2d::CCRepeatForever::create(cocos2d::CCSequence::create(&a));
+	}
+	void onRelease()
+	{
 	}
 	/**
 	 *  do stuff when before entering into new state
 	 */
 	void onEnter(CGameObject* object)
 	{
+		cocos2d::CCArray a ;
+		a.addObject(cocos2d::CCRotateBy::create(30.0f, 360.0f));
+		idleAction = cocos2d::CCRepeatForever::create(cocos2d::CCSequence::create(&a));
 		object->getDecorator()->runAction(idleAction);
 	}
 	/**
@@ -106,4 +114,51 @@ public:
 private:
 	cocos2d::CCAction* idleAction;
 };
+
+/**
+ * specialize all states with an implementation 
+ * <FLOWER harvested>
+ */
+template<>
+class CConsumableState <ConsumableConstants::CONSUMABLE_STATE_HARVESTED, ConsumableConstants::OBJECT_TYPE_FLOWER> : public IState
+{
+public:
+	CConsumableState()
+		: harvestedAction(NULL)
+	{
+	}
+	/**
+	*  load animations or any item related to this state
+	*/
+	void onInit()
+	{
+	}
+	void onRelease()
+	{
+	}
+	/**
+	 *  do stuff when before entering into new state
+	 */
+	void onEnter(CGameObject* object)
+	{
+		// no animation yet ...just exit for now
+		onExit(object);
+	}
+	/**
+	 * do stuff before leaving state
+	 */
+	void onExit(CGameObject* object)
+	{
+		object->onExitState(ConsumableConstants::CONSUMABLE_STATE_HARVESTED);
+	}
+	/**
+	 * do stuff before leaving state
+	 */
+	void onUpdate(float dt)
+	{
+	}
+private:
+	cocos2d::CCAction* harvestedAction;
+};
+
 #endif

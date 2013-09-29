@@ -26,6 +26,8 @@ luaPopulateTile(4,   4,       1, 	1);
 -- flowers --
 luaPopulateTile(0,   0,       1, 	2);
 luaPopulateTile(3,   2,       1, 	2);
+luaPopulateTile(2,   2,       1, 	2);
+
 -- actors --
-luaPopulateTile(3,   5,       0, 	1);
+luaPopulateTile(3,   4,       0, 	1);
 

@@ -103,7 +103,7 @@ void CGameController::loadBoardSettings(int nrows, int ncols, int ox, int oy, in
 	// center grid
 	if (ox == -1 || oy == -1)
 	{
-		CDecoratorObject dummy(CDecoratorObject::OBJECT_TYPE_EMPTY_TILE, scene);
+		CDecoratorObject dummy(CDecoratorObject::OBJECT_TYPE_EMPTY_TILE, scene, this);
 		cocos2d::CCRect rect = dummy.getBounds();
 		int width = rect.getMaxX() - rect.getMinX();
 		int height = rect.getMaxY() - rect.getMinY();
@@ -134,21 +134,21 @@ void CGameController::populateTile(int row, int col, int type, int subtype)
 	CGameObject* go = NULL;
 	if (type == CGameObject::OBJECT_TYPE_CONSUMABLE)
 	{
-		go = new CConsumableObject(subtype, scene);
+		go = new CConsumableObject(subtype, scene, this);
 		cocos2d::CCPoint position = cocos2d::CCPoint(grid[row][col][0]->getScreenPosition().x, 
 													grid[row][col][0]->getScreenPosition().y);
 		go->setScreenPosition(position);
 	} 
 	else if ( type == CGameObject::OBJECT_TYPE_DECORATOR)
 	{
-		go = new CDecoratorObject(CDecoratorObject::OBJECT_TYPE_EMPTY_TILE, scene);
+		go = new CDecoratorObject(CDecoratorObject::OBJECT_TYPE_EMPTY_TILE, scene, this);
 		cocos2d::CCPoint position = cocos2d::CCPoint(offsetX + col * (go->getBounds().getMaxX() - go->getBounds().getMinX() + paddingX),
 			offsetY - row * (go->getBounds().getMaxY() - go->getBounds().getMinY() + paddingY));
 		go->setScreenPosition(position);
 	}
 	else if (type == CGameObject::OBJECT_TYPE_ACTOR)
 	{
-		go = new CActorObject(subtype, scene);
+		go = new CActorObject(subtype, scene, this);
 		cocos2d::CCPoint position = cocos2d::CCPoint(grid[row][col][0]->getScreenPosition().x, 
 													grid[row][col][0]->getScreenPosition().y);
 		go->setScreenPosition(position);
@@ -158,6 +158,13 @@ void CGameController::populateTile(int row, int col, int type, int subtype)
 }
 void CGameController::update(float dt)
 {
+	//  cleanup dump
+	for (int i = 0; i < dump.size(); i++)
+	{
+		CC_SAFE_DELETE(dump[i]);
+	}
+	dump.clear();
+	//  update all scene
 	for (unsigned row = 0; row < gridSizeY; row++)
 	{
 		for (unsigned col = 0; col < gridSizeX; col++)
@@ -192,4 +199,9 @@ void CGameController::onTouch(cocos2d::CCPoint point)
 			}
 		}
 	}
+}
+void CGameController::removeGameObject(CGameObject* object) 
+{
+	grid[static_cast<int>(object->getTilePosition().x)][static_cast<int>(object->getTilePosition().y)].pop_back();
+	dump.push_back(object);
 }
